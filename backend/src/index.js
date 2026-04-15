@@ -22,4 +22,8 @@ const startServer = async () => {
   }
 };
 
+console.log(
+  "MongoDB URI Check:",
+  process.env.MONGODB_URI ? "✅ Found" : "❌ Not Found",
+);
 startServer();
