@@ -1,6 +1,7 @@
+import { apiConfig } from "../config/api.config.js";
 import { formatEndpoint } from "../utils/format.util.js";
 
-export const createApiMap = (apiConfig) => {
+export function ApiMap() {
   const authRows = [
     formatEndpoint("post", `${apiConfig.baseURL}${apiConfig.endpoints.users.register}`),
     formatEndpoint("post", `${apiConfig.baseURL}${apiConfig.endpoints.users.login}`),
@@ -14,26 +15,30 @@ export const createApiMap = (apiConfig) => {
     formatEndpoint("delete", `${apiConfig.baseURL}${apiConfig.endpoints.posts.delete}`),
   ];
 
-  return `
-    <section class="panel" id="api-map">
-      <div class="panel-header">
+  return (
+    <section className="panel" id="api-map">
+      <div className="panel-header">
         <div>
-          <p class="eyebrow">Future Integration</p>
+          <p className="eyebrow">Future Integration</p>
           <h2>Peta endpoint backend</h2>
         </div>
-        <div class="pill">Ready to connect</div>
+        <div className="pill">Ready to connect</div>
       </div>
 
-      <div class="api-grid">
-        <article class="api-card">
+      <div className="api-grid">
+        <article className="api-card">
           <h3>User Routes</h3>
-          ${authRows.map((row) => `<code>${row}</code>`).join("")}
+          {authRows.map((row) => (
+            <code key={row}>{row}</code>
+          ))}
         </article>
-        <article class="api-card">
+        <article className="api-card">
           <h3>Post Routes</h3>
-          ${postRows.map((row) => `<code>${row}</code>`).join("")}
+          {postRows.map((row) => (
+            <code key={row}>{row}</code>
+          ))}
         </article>
       </div>
     </section>
-  `;
-};
+  );
+}

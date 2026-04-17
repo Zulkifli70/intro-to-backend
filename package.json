@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node backend/src/index.js",
     "dev": "nodemon backend/src/index.js",
-    "frontend": "node frontend/server.js"
+    "frontend": "vite --config frontend/vite.config.js",
+    "frontend:build": "vite build --config frontend/vite.config.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -19,5 +20,9 @@
     "nodemon": "^3.1.14",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.8"
   }
 }
