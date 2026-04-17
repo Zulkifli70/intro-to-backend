@@ -8,13 +8,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node backend/src/index.js",
-    "dev": "nodemon backend/src/index.js"
+    "dev": "nodemon backend/src/index.js",
+    "frontend": "node frontend/server.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.4.1",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   }
 }
