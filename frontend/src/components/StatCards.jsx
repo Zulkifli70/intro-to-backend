@@ -1,22 +1,22 @@
 export function StatCards({ posts, user }) {
-  const totalDrafts = posts.filter((post) => post.status === "Draft").length;
+  const syncedPosts = posts.filter((post) => post.status === "Synced").length;
 
   return (
     <section className="stats-grid" id="overview">
       <article className="stat-card accent">
         <span>Total Post</span>
         <strong>{posts.length}</strong>
-        <p>Siap nanti ditarik dari endpoint list post.</p>
+        <p>Sudah ditarik langsung dari endpoint backend.</p>
       </article>
       <article className="stat-card">
-        <span>Draft Aktif</span>
-        <strong>{totalDrafts}</strong>
-        <p>Berguna untuk preview state data dari backend.</p>
+        <span>Data Tersinkron</span>
+        <strong>{syncedPosts}</strong>
+        <p>Menunjukkan post yang berhasil dimapping dari response backend.</p>
       </article>
       <article className="stat-card">
         <span>User Aktif</span>
-        <strong>{user.username}</strong>
-        <p>Diambil sementara dari mock auth service.</p>
+        <strong>{user?.username || "Guest"}</strong>
+        <p>State user disimpan setelah register atau login berhasil.</p>
       </article>
     </section>
   );

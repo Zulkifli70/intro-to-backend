@@ -1,37 +1,66 @@
-import { mockUser } from "../data/mock-data.js";
+import { apiConfig } from "../config/api.config.js";
+import { apiRequest } from "./http.service.js";
 
-let currentUser = { ...mockUser };
+const STORAGE_KEY = "intro-to-backend:user";
 
-const wait = (payload) =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(payload), 250);
-  });
+const readStoredUser = () => {
+  const rawUser = window.localStorage.getItem(STORAGE_KEY);
 
-export const getCurrentUser = async () => wait(currentUser);
+  if (!rawUser) {
+    return null;
+  }
 
-export const registerUser = async (payload) => {
-  currentUser = {
-    id: `usr_${Date.now()}`,
-    username: payload.username,
-    email: payload.email,
-  };
-
-  return wait({
-    message: "Simulasi register berhasil. Tinggal ganti ke request API nanti.",
-    user: currentUser,
-  });
+  try {
+    return JSON.parse(rawUser);
+  } catch {
+    window.localStorage.removeItem(STORAGE_KEY);
+    return null;
+  }
 };
 
-export const loginUser = async ({ email }) =>
-  wait({
-    message: "Simulasi login berhasil.",
-    user: {
-      ...currentUser,
-      email,
-    },
+const persistUser = (user) => {
+  if (!user) {
+    window.localStorage.removeItem(STORAGE_KEY);
+    return null;
+  }
+
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+  return user;
+};
+
+export const getCurrentUser = async () => readStoredUser();
+
+export const registerUser = async (payload) => {
+  const response = await apiRequest(apiConfig.endpoints.users.register, {
+    method: "POST",
+    body: JSON.stringify(payload),
   });
 
-export const logoutUser = async () =>
-  wait({
-    message: "Simulasi logout berhasil.",
+  return {
+    ...response,
+    user: persistUser(response.user),
+  };
+};
+
+export const loginUser = async (payload) => {
+  const response = await apiRequest(apiConfig.endpoints.users.login, {
+    method: "POST",
+    body: JSON.stringify(payload),
   });
+
+  return {
+    ...response,
+    user: persistUser(response.user),
+  };
+};
+
+export const logoutUser = async (payload) => {
+  const response = await apiRequest(apiConfig.endpoints.users.logout, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+
+  persistUser(null);
+
+  return response;
+};

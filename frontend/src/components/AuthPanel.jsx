@@ -27,7 +27,9 @@ export function AuthPanel({ user, onLogin, onLogout, onRegister }) {
           <p className="eyebrow">Auth Interface</p>
           <h2>Register, login, dan logout</h2>
         </div>
-        <div className="pill">Current user: {user.username}</div>
+        <div className="pill">
+          Current user: {user?.username || "Belum login"}
+        </div>
       </div>
 
       <div className="form-grid">
@@ -45,7 +47,7 @@ export function AuthPanel({ user, onLogin, onLogout, onRegister }) {
             Password
             <input name="password" type="password" placeholder="Masukkan password" required />
           </label>
-          <button type="submit">Simulasikan Register</button>
+          <button type="submit">Register User</button>
         </form>
 
         <form className="card-form" onSubmit={handleLogin}>
@@ -58,16 +60,22 @@ export function AuthPanel({ user, onLogin, onLogout, onRegister }) {
             Password
             <input name="password" type="password" placeholder="Masukkan password" required />
           </label>
-          <button type="submit">Simulasikan Login</button>
+          <button type="submit">Login User</button>
         </form>
 
         <form className="card-form" onSubmit={handleLogout}>
           <h3>Logout</h3>
           <label>
             Email
-            <input defaultValue={user.email} name="email" type="email" required />
+            <input
+              defaultValue={user?.email || ""}
+              name="email"
+              type="email"
+              placeholder="Email user yang login"
+              required
+            />
           </label>
-          <button type="submit">Simulasikan Logout</button>
+          <button type="submit">Logout User</button>
         </form>
       </div>
     </section>

@@ -1,42 +1,48 @@
-import { mockPosts } from "../data/mock-data.js";
+import { apiConfig } from "../config/api.config.js";
+import { apiRequest } from "./http.service.js";
 
-let posts = [...mockPosts];
+const normalizePost = (post) => ({
+  id: post._id || post.id,
+  name: post.name,
+  description: post.description,
+  age: Number(post.age),
+  status: "Synced",
+});
 
-const wait = (payload) =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(payload), 250);
-  });
-
-export const getPosts = async () => wait([...posts]);
+export const getPosts = async () => {
+  const response = await apiRequest(apiConfig.endpoints.posts.list);
+  return response.map(normalizePost);
+};
 
 export const createPost = async (payload) => {
-  const newPost = {
-    id: `pst_${Date.now()}`,
-    ...payload,
-    status: "Draft",
-  };
-
-  posts = [newPost, ...posts];
-  return wait({
-    message: "Post berhasil ditambahkan ke mock state.",
-    post: newPost,
+  const response = await apiRequest(apiConfig.endpoints.posts.create, {
+    method: "POST",
+    body: JSON.stringify(payload),
   });
+
+  return {
+    ...response,
+    post: response.post ? normalizePost(response.post) : null,
+  };
 };
 
 export const updatePost = async (id, payload) => {
-  posts = posts.map((post) => (post.id === id ? { ...post, ...payload } : post));
-  const updatedPost = posts.find((post) => post.id === id);
-
-  return wait({
-    message: "Post mock berhasil diperbarui.",
-    post: updatedPost,
+  const endpoint = apiConfig.endpoints.posts.update.replace(":id", id);
+  const response = await apiRequest(endpoint, {
+    method: "PATCH",
+    body: JSON.stringify(payload),
   });
+
+  return {
+    ...response,
+    post: response.post ? normalizePost(response.post) : null,
+  };
 };
 
 export const deletePost = async (id) => {
-  posts = posts.filter((post) => post.id !== id);
+  const endpoint = apiConfig.endpoints.posts.delete.replace(":id", id);
 
-  return wait({
-    message: "Post mock berhasil dihapus.",
+  return apiRequest(endpoint, {
+    method: "DELETE",
   });
 };

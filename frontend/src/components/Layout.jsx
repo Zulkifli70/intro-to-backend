@@ -6,8 +6,8 @@ export function Layout({ children }) {
           <p className="eyebrow">Frontend Module</p>
           <h1>Intro Dashboard</h1>
           <p className="sidebar-copy">
-            Interface ini masih memakai mock data, tapi struktur file dan flow-nya
-            sudah disiapkan untuk menyambung ke backend kamu nanti.
+            Interface ini sudah terhubung ke backend, dengan service layer yang tetap
+            dipisah supaya flow request dan pengembangan berikutnya tetap rapi.
           </p>
         </div>
 

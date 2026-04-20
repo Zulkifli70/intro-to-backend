@@ -22,9 +22,9 @@ export function DashboardPage(props) {
         <p className="eyebrow">Simple Frontend</p>
         <h2>Dashboard frontend untuk backend auth dan posts</h2>
         <p className="hero-copy">
-          Fokusnya masih di interface dan struktur file. Logic service sudah dipisah
-          supaya nanti saat backend siap, kita tinggal ganti mock function ke HTTP
-          request.
+          Frontend sekarang sudah memanggil backend secara langsung untuk auth dan
+          manajemen post. Service layer tetap dipisah supaya alur request tetap rapi
+          dan mudah dikembangkan.
         </p>
       </section>
 

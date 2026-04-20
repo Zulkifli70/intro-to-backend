@@ -18,12 +18,19 @@ export default function App() {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
   const [toastMessage, setToastMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadInitialData = async () => {
-      const [postData, userData] = await Promise.all([getPosts(), getCurrentUser()]);
-      setPosts(postData);
-      setUser(userData);
+      try {
+        const [postData, userData] = await Promise.all([getPosts(), getCurrentUser()]);
+        setPosts(postData);
+        setUser(userData);
+      } catch (error) {
+        setToastMessage(error.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     loadInitialData();
@@ -40,41 +47,66 @@ export default function App() {
   }, [toastMessage]);
 
   const handleRegister = async (payload) => {
-    const response = await registerUser(payload);
-    setUser(response.user);
-    setToastMessage(response.message);
+    try {
+      const response = await registerUser(payload);
+      setUser(response.user);
+      setToastMessage(response.message);
+    } catch (error) {
+      setToastMessage(error.message);
+    }
   };
 
   const handleLogin = async (payload) => {
-    const response = await loginUser(payload);
-    setUser(response.user);
-    setToastMessage(response.message);
+    try {
+      const response = await loginUser(payload);
+      setUser(response.user);
+      setToastMessage(response.message);
+    } catch (error) {
+      setToastMessage(error.message);
+    }
   };
 
-  const handleLogout = async () => {
-    const response = await logoutUser();
-    setToastMessage(response.message);
+  const handleLogout = async (payload) => {
+    try {
+      const response = await logoutUser(payload);
+      setUser(null);
+      setToastMessage(response.message);
+    } catch (error) {
+      setToastMessage(error.message);
+    }
   };
 
   const handleCreatePost = async (payload) => {
-    const response = await createPost(payload);
-    setPosts(await getPosts());
-    setToastMessage(response.message);
+    try {
+      const response = await createPost(payload);
+      setPosts(await getPosts());
+      setToastMessage(response.message);
+    } catch (error) {
+      setToastMessage(error.message);
+    }
   };
 
   const handleUpdatePost = async (postId, payload) => {
-    const response = await updatePost(postId, payload);
-    setPosts(await getPosts());
-    setToastMessage(response.message);
+    try {
+      const response = await updatePost(postId, payload);
+      setPosts(await getPosts());
+      setToastMessage(response.message);
+    } catch (error) {
+      setToastMessage(error.message);
+    }
   };
 
   const handleDeletePost = async (postId) => {
-    const response = await deletePost(postId);
-    setPosts(await getPosts());
-    setToastMessage(response.message);
+    try {
+      const response = await deletePost(postId);
+      setPosts(await getPosts());
+      setToastMessage(response.message);
+    } catch (error) {
+      setToastMessage(error.message);
+    }
   };
 
-  if (!user) {
+  if (isLoading) {
     return null;
   }
 

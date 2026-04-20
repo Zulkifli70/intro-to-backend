@@ -24,7 +24,7 @@ export function PostPanel({ onCreatePost, onDeletePost, onUpdatePost, posts }) {
           <p className="eyebrow">Post Interface</p>
           <h2>Create dan kelola post</h2>
         </div>
-        <div className="pill">{posts.length} mock post</div>
+        <div className="pill">{posts.length} synced post</div>
       </div>
 
       <div className="posts-layout">
@@ -47,7 +47,7 @@ export function PostPanel({ onCreatePost, onDeletePost, onUpdatePost, posts }) {
             Age
             <input name="age" type="number" min="1" placeholder="Umur/data age" required />
           </label>
-          <button type="submit">Tambah Mock Post</button>
+          <button type="submit">Tambah Post ke Backend</button>
         </form>
 
         <div className="post-list">

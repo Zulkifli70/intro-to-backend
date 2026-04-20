@@ -19,10 +19,10 @@ export function ApiMap() {
     <section className="panel" id="api-map">
       <div className="panel-header">
         <div>
-          <p className="eyebrow">Future Integration</p>
-          <h2>Peta endpoint backend</h2>
+          <p className="eyebrow">Live Integration</p>
+          <h2>Peta endpoint backend yang dipakai frontend</h2>
         </div>
-        <div className="pill">Ready to connect</div>
+        <div className="pill">Connected</div>
       </div>
 
       <div className="api-grid">
