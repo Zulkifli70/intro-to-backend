@@ -3,11 +3,12 @@ export function Layout({ children }) {
     <div className="app-shell">
       <aside className="sidebar">
         <div>
-          <p className="eyebrow">Frontend Module</p>
+          <p className="eyebrow">Intro-to-backend</p>
           <h1>Intro Dashboard</h1>
           <p className="sidebar-copy">
-            Interface ini sudah terhubung ke backend, dengan service layer yang tetap
-            dipisah supaya flow request dan pengembangan berikutnya tetap rapi.
+            Interface ini sudah terhubung ke backend, dengan service layer yang
+            tetap dipisah supaya flow request dan pengembangan berikutnya tetap
+            rapi.
           </p>
         </div>
 
