@@ -6,9 +6,9 @@ export function Layout({ children }) {
           <p className="eyebrow">Intro-to-backend</p>
           <h1>Intro Dashboard</h1>
           <p className="sidebar-copy">
-            Interface ini sudah terhubung ke backend, dengan service layer yang
-            tetap dipisah supaya flow request dan pengembangan berikutnya tetap
-            rapi.
+            Interface ini sudah terhubung ke sisi backend, dengan service layer
+            yang tetap dipisah supaya flow request dan pengembangan berikutnya
+            tetap rapi.
           </p>
         </div>
 
