@@ -22,7 +22,7 @@ export function PostPanel({ onCreatePost, onDeletePost, onUpdatePost, posts }) {
       <div className="panel-header">
         <div>
           <p className="eyebrow">Post Interface</p>
-          <h2>Create dan kelola post</h2>
+          <h2>Buat dan kelola post</h2>
         </div>
         <div className="pill">{posts.length} synced post</div>
       </div>
@@ -45,7 +45,13 @@ export function PostPanel({ onCreatePost, onDeletePost, onUpdatePost, posts }) {
           </label>
           <label>
             Age
-            <input name="age" type="number" min="1" placeholder="Umur/data age" required />
+            <input
+              name="age"
+              type="number"
+              min="1"
+              placeholder="Umur/data age"
+              required
+            />
           </label>
           <button type="submit">Tambah Post ke Backend</button>
         </form>
@@ -66,9 +72,17 @@ export function PostPanel({ onCreatePost, onDeletePost, onUpdatePost, posts }) {
                 <span>ID: {post.id}</span>
               </div>
 
-              <form className="inline-form" onSubmit={handleUpdatePost(post.id)}>
+              <form
+                className="inline-form"
+                onSubmit={handleUpdatePost(post.id)}
+              >
                 <input defaultValue={post.name} name="name" type="text" />
-                <input defaultValue={post.age} min="1" name="age" type="number" />
+                <input
+                  defaultValue={post.age}
+                  min="1"
+                  name="age"
+                  type="number"
+                />
                 <button type="submit">Update</button>
               </form>
 

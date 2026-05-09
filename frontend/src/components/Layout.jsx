@@ -4,7 +4,7 @@ export function Layout({ children }) {
       <aside className="sidebar">
         <div>
           <p className="eyebrow">Intro-to-backend-developer</p>
-          <h1>Intro Dashboard</h1>
+          <h1>Intro </h1>
           <p className="sidebar-copy">
             Interface ini sudah terhubung ke sisi backend, dengan service layer
             yang tetap dipisah supaya flow request dan pengembangan berikutnya
